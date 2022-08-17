@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   automoderator-automod:
-    image: chatsift/automoderator_service
+    image: chatsift/automoderator
     env_file:
       - ./.env.automoderator
     environment:
@@ -13,7 +13,7 @@ services:
     command: ['node', '--enable-source-maps', 'services/automod/dist/index.js']
 
   automoderator-discord-proxy:
-    image: chatsift/automoderator_service
+    image: chatsift/automoderator
     env_file:
       - ./.env.automoderator
     volumes:
@@ -24,7 +24,7 @@ services:
     command: ['node', '--enable-source-maps', 'services/discord-proxy/dist/index.js']
 
   automoderator-gateway:
-    image: chatsift/automoderator_service
+    image: chatsift/automoderator
     env_file:
       - ./.env.automoderator
     environment:
@@ -36,7 +36,7 @@ services:
     command: ['node', '--enable-source-maps', 'services/gateway/dist/index.js']
 
   automoderator-interactions:
-    image: chatsift/automoderator_service
+    image: chatsift/automoderator
     env_file:
       - ./.env.automoderator
     environment:
@@ -49,7 +49,7 @@ services:
     command: ['node', '--enable-source-maps', 'services/interactions/dist/index.js']
 
   automoderator-logging:
-    image: chatsift/automoderator_service
+    image: chatsift/automoderator
     env_file:
       - ./.env.automoderator
     environment:
@@ -60,7 +60,7 @@ services:
     command: ['node', '--enable-source-maps', 'services/logging/dist/index.js']
 
   automoderator-mod-observer:
-    image: chatsift/automoderator_service
+    image: chatsift/automoderator
     env_file:
       - ./.env.automoderator
     environment:
@@ -71,7 +71,7 @@ services:
     command: ['node', '--enable-source-maps', 'services/mod-observer/dist/index.js']
 
   automoderator-scheduler:
-    image: chatsift/automoderator_service
+    image: chatsift/automoderator
     env_file:
       - ./.env.automoderator
     environment:

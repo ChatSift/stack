@@ -6,4 +6,4 @@ FROM caddy:latest
 LABEL name "chatsift caddy"
 
 COPY --from=builder /usr/bin/caddy /usr/bin/caddy
-COPY ./docker/caddy/Caddyfile /etc/caddy
+COPY ./Caddyfile /etc/caddy
