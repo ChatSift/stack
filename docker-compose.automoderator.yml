@@ -1,0 +1,86 @@
+version: '3.7'
+
+services:
+  automoderator-automod:
+    image: chatsift/automoderator_service
+    env_file:
+      - ./.env.automoderator
+    environment:
+      DB_URL: 'postgresql://user:admin@postgres:5432/automoderator'
+    restart: unless-stopped
+    volumes:
+      - ./logs/automoderator:/usr/service/logs
+    command: ['node', '--enable-source-maps', 'services/automod/dist/index.js']
+
+  automoderator-discord-proxy:
+    image: chatsift/automoderator_service
+    env_file:
+      - ./.env.automoderator
+    volumes:
+      - ./logs/automoderator:/usr/service/logs
+    restart: unless-stopped
+    expose:
+      - 3003
+    command: ['node', '--enable-source-maps', 'services/discord-proxy/dist/index.js']
+
+  automoderator-gateway:
+    image: chatsift/automoderator_service
+    env_file:
+      - ./.env.automoderator
+    environment:
+      AMQP_URL: 'amqp://rabbitmq:5672'
+      REDIS_URL: 'redis://redis:6379/0'
+    restart: unless-stopped
+    volumes:
+      - ./logs/automoderator:/usr/service/logs
+    command: ['node', '--enable-source-maps', 'services/gateway/dist/index.js']
+
+  automoderator-interactions:
+    image: chatsift/automoderator_service
+    env_file:
+      - ./.env.automoderator
+    environment:
+      DB_URL: 'postgresql://user:admin@postgres:5432/automoderator'
+    restart: unless-stopped
+    expose:
+      - 3002
+    volumes:
+      - ./logs/automoderator:/usr/service/logs
+    command: ['node', '--enable-source-maps', 'services/interactions/dist/index.js']
+
+  automoderator-logging:
+    image: chatsift/automoderator_service
+    env_file:
+      - ./.env.automoderator
+    environment:
+      DB_URL: 'postgresql://user:admin@postgres:5432/automoderator'
+    restart: unless-stopped
+    volumes:
+      - ./logs/automoderator:/usr/service/logs
+    command: ['node', '--enable-source-maps', 'services/logging/dist/index.js']
+
+  automoderator-mod-observer:
+    image: chatsift/automoderator_service
+    env_file:
+      - ./.env.automoderator
+    environment:
+      DB_URL: 'postgresql://user:admin@postgres:5432/automoderator'
+    restart: unless-stopped
+    volumes:
+      - ./logs/automoderator:/usr/service/logs
+    command: ['node', '--enable-source-maps', 'services/mod-observer/dist/index.js']
+
+  automoderator-scheduler:
+    image: chatsift/automoderator_service
+    env_file:
+      - ./.env.automoderator
+    environment:
+      DB_URL: 'postgresql://user:admin@postgres:5432/automoderator'
+    restart: unless-stopped
+    volumes:
+      - ./logs/automoderator:/usr/service/logs
+    command: ['node', '--enable-source-maps', 'services/scheduler/dist/index.js']
+
+volumes:
+  redis-data:
+    name: 'automoderator-v2-redis-data'

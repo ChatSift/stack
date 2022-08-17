@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  website-backend:
+    image: chatsift/website:latest
+    env_file:
+      - ./.env.website
+    environment:
+      DATABASE_URL: 'postgresql://user:admin@postgres:5432/website'
+    restart: unless-stopped
+    volumes:
+      - ./logs/website:/usr/website/logs
+    depends_on:
+      - postgres
+    command:
+      [
+        'node',
+        '--es-module-specifier-resolution=node',
+        '--enable-source-maps',
+        '--no-warnings',
+        './packages/backend/dist/index.js',
+      ]

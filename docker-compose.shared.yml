@@ -1,0 +1,70 @@
+version: '3.7'
+
+services:
+  postgres:
+    build:
+      context: ./build/postgresql
+      dockerfile: ./Dockerfile
+    environment:
+      POSTGRES_USER: 'user'
+      POSTGRES_PASSWORD: 'admin'
+      POSTGRES_MULTIPLE_DATABASES: 'ama,modmail,automoderator,website'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:${DATABASE_PORT}:5432
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U user']
+      interval: 10s
+      timeout: 5s
+
+  caddy:
+    build:
+      context: ./build/caddy
+      dockerfile: ./Dockerfile
+    ports:
+      - '80:80'
+      - '443:443'
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    restart: unless-stopped
+    expose:
+      - '5672'
+    healthcheck:
+      test: ['CMD', 'rabbitmq-diagnostics', '-q', 'ping']
+      interval: 60s
+      timeout: 5s
+
+  redis:
+    image: redis:6-alpine
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD-SHELL', 'redis-cli ping']
+      interval: 10s
+      timeout: 5s
+
+  ghost:
+    image: ghost:4-alpine
+    restart: unless-stopped
+    expose:
+      - 2368
+    environment:
+      NODE_ENV: 'production'
+      url: 'https://blog.automoderator.app'
+      database__client: 'sqlite3'
+      mail__transport: 'SMTP'
+      mail__options__service: 'Mailgun'
+    volumes:
+      - ghost-data:/var/lib/ghost/content
+
+volumes:
+  postgres-data:
+    name: chatsift-postgres-data
+  redis-data:
+    name: 'chatsift-redis-data'
+  ghost-data:
+    name: 'chatsift-ghost-data'

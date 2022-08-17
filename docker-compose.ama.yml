@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  ama-bot:
+    image: chatsift/ama:latest
+    env_file:
+      - ./.env.ama
+    environment:
+      DATABASE_URL: 'postgresql://user:admin@postgres:5432/ama'
+    restart: unless-stopped
+    volumes:
+      - ./logs/ama:/usr/ama/logs
+    depends_on:
+      - postgres
+    command:
+      [
+        'node',
+        '--es-module-specifier-resolution=node',
+        '--enable-source-maps',
+        '--no-warnings',
+        './packages/bot/dist/index.js',
+      ]
