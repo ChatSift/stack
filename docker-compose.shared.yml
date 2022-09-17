@@ -23,6 +23,8 @@ services:
     build:
       context: ./build/caddy
       dockerfile: ./Dockerfile
+    env_file:
+      - ./.env.root
     ports:
       - '80:80'
       - '443:443'
