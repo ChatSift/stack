@@ -27,6 +27,9 @@ services:
       - ./.env.modmail
     environment:
       DATABASE_URL: 'postgresql://user:admin@postgres:5432/modmail'
+      PORT: '8080'
+    expose:
+      - 8080
     restart: unless-stopped
     volumes:
       - ./logs/modmail:/usr/modmail/logs

@@ -3,6 +3,10 @@
 }
 
 api.automoderator.app {
+  reverse_proxy * http://website-backend:8080
+}
+
+interactions.automoderator.app {
   reverse_proxy * http://interactions:3002
 }
 
