@@ -7,7 +7,7 @@ api.automoderator.app {
 }
 
 interactions.automoderator.app {
-  reverse_proxy * http://interactions:3002
+  reverse_proxy * http://automoderator-interactions:3002
 }
 
 blog.automoderator.app {
