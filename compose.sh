@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker-compose \
+docker compose \
   -p chatsift \
   -f docker-compose.ama.yml \
   -f docker-compose.automoderator.yml \
