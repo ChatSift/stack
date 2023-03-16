@@ -7,5 +7,6 @@ docker compose \
   -f docker-compose.modmail.yml \
   -f docker-compose.roles.yml \
   -f docker-compose.shared.yml \
+  -f docker-compose.social.yml \
   -f docker-compose.website.yml \
   ${@%$0}

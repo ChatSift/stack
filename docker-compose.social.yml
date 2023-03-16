@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  social-bot:
+    image: chatsift/social:latest
+    env_file:
+      - ./.env.social
+    environment:
+      DATABASE_URL: 'postgresql://user:admin@postgres:5432/social'
+    restart: unless-stopped
+    volumes:
+      - ./logs/social:/usr/social/logs
+    depends_on:
+      - postgres
+    command:
+      [
+        'node',
+        '--es-module-specifier-resolution=node',
+        '--enable-source-maps',
+        '--no-warnings',
+        './packages/bot/dist/index.js',
+      ]
+
+  social-api:
+    image: chatsift/social:latest
+    env_file:
+      - ./.env.social
+    environment:
+      DATABASE_URL: 'postgresql://user:admin@postgres:5432/social'
+      PORT: '8080'
+    expose:
+      - 8080
+    restart: unless-stopped
+    volumes:
+      - ./logs/social:/usr/social/logs
+    depends_on:
+      - postgres
+    command:
+      [
+        'node',
+        '--es-module-specifier-resolution=node',
+        '--enable-source-maps',
+        '--no-warnings',
+        './packages/api/dist/index.js',
+      ]
