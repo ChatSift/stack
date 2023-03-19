@@ -19,6 +19,22 @@ services:
       interval: 10s
       timeout: 5s
 
+  pg-backup:
+    image: kartoza/pg-backup:12.4
+    environment:
+      POSTGRES_USER: 'user'
+      POSTGRES_PASS: 'admin'
+      POSTGRES_PORT: '5432'
+      POSTGRES_HOST: 'postgres'
+      REMOVE_BEFORE: '30'
+      STORAGE_BACKEND: 'S3'
+      BUCKET: 'chatsift'
+    env_file:
+      - .env.pg_backup
+    restart: on-failure
+    depends_on:
+      - postgres
+
   caddy:
     build:
       context: ./build/caddy
