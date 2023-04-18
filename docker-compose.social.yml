@@ -13,7 +13,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./logs/social:/usr/social/logs
-    command: 'node --enable-source-maps ./packages/bot/dist/index.js 2>&1 | node --enable-source-maps ./node_modules/.bin/chatsift-logs'
+    command: 'sh -c "node --enable-source-maps ./packages/bot/dist/index.js 2>&1 | node --enable-source-maps ./node_modules/.bin/chatsift-logs"'
 
   social-api:
     image: chatsift/social:latest
@@ -29,4 +29,4 @@ services:
     restart: unless-stopped
     volumes:
       - ./logs/social:/usr/social/logs
-    command: 'node --enable-source-maps ./packages/api/dist/index.js 2>&1 | node --enable-source-maps ./node_modules/.bin/chatsift-logs'
+    command: 'sh -c "node --enable-source-maps ./packages/api/dist/index.js 2>&1 | node --enable-source-maps ./node_modules/.bin/chatsift-logs"'
