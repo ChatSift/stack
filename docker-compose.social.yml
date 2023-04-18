@@ -5,24 +5,15 @@ services:
     image: chatsift/social:latest
     env_file:
       - ./.env.social
+      - ./.env.parseable
     environment:
       DATABASE_URL: 'postgresql://user:admin@postgres:5432/social'
       REDIS_URL: 'redis://redis:6379/1'
+      SERVICE_NAME: 'social-bot'
     restart: unless-stopped
     volumes:
       - ./logs/social:/usr/social/logs
-    depends_on:
-      - postgres
-    command:
-      [
-        'node',
-        '--enable-source-maps',
-        './packages/bot/dist/index.js',
-        '|&',
-        'node',
-        '--enable-source-maps',
-        './node_modules/.bin/chatsift-logs'
-      ]
+    command: 'node --enable-source-maps ./packages/bot/dist/index.js 2>&1 | node --enable-source-maps ./node_modules/.bin/chatsift-logs'
 
   social-api:
     image: chatsift/social:latest
@@ -38,15 +29,4 @@ services:
     restart: unless-stopped
     volumes:
       - ./logs/social:/usr/social/logs
-    depends_on:
-      - postgres
-    command:
-      [
-        'node',
-        '--enable-source-maps',
-        './packages/api/dist/index.js',
-        '|&',
-        'node',
-        '--enable-source-maps',
-        './node_modules/.bin/chatsift-logs'
-      ]
+    command: 'node --enable-source-maps ./packages/api/dist/index.js 2>&1 | node --enable-source-maps ./node_modules/.bin/chatsift-logs'
