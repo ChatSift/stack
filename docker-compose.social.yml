@@ -41,4 +41,8 @@ services:
         'node',
         '--enable-source-maps',
         './packages/api/dist/index.js',
+        '|&',
+        'node',
+        '--enable-source-maps',
+        './node_modules/.bin/chatsift-logs'
       ]
