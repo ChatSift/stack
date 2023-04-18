@@ -24,9 +24,11 @@ services:
     image: chatsift/social:latest
     env_file:
       - ./.env.social
+      - ./.env.parseable
     environment:
       DATABASE_URL: 'postgresql://user:admin@postgres:5432/social'
       PORT: '8080'
+      SERVICE_NAME: 'social-api'
     expose:
       - 8080
     restart: unless-stopped
