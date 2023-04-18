@@ -9,7 +9,7 @@ services:
     environment:
       DATABASE_URL: 'postgresql://user:admin@postgres:5432/social'
       REDIS_URL: 'redis://redis:6379/1'
-      SERVICE_NAME: 'social-bot'
+      SERVICE_NAME: 'socialbot'
     restart: unless-stopped
     volumes:
       - ./logs/social:/usr/social/logs
@@ -23,7 +23,7 @@ services:
     environment:
       DATABASE_URL: 'postgresql://user:admin@postgres:5432/social'
       PORT: '8080'
-      SERVICE_NAME: 'social-api'
+      SERVICE_NAME: 'socialapi'
     expose:
       - 8080
     restart: unless-stopped
