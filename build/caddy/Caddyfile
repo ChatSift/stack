@@ -13,3 +13,7 @@ interactions.automoderator.app {
 blog.automoderator.app {
   reverse_proxy * http://ghost:2368
 }
+
+logs.automoderator.app {
+  reverse_proxy * http://parseable:8000
+}
