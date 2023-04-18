@@ -107,7 +107,7 @@ services:
       '--cleanup',
       '--include-restarting',
       '--include-stopped',
-      'chatsift-social-bot chatsift-social-api'
+      'chatsift-social-bot-1', 'chatsift-social-api-1'
     ]
 
 volumes:
