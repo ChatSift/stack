@@ -97,6 +97,18 @@ services:
     volumes:
       - ghost-data:/var/lib/ghost/content
 
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: [
+      '--interval 120',
+      '--cleanup',
+      '--include-restarting',
+      '--include-stopped',
+      'chatsift-social-bot chatsift-social-api'
+    ]
+
 volumes:
   postgres-data:
     name: chatsift-postgres-data
