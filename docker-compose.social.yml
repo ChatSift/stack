@@ -16,9 +16,7 @@ services:
     command:
       [
         'node',
-        '--es-module-specifier-resolution=node',
         '--enable-source-maps',
-        '--no-warnings',
         './packages/bot/dist/index.js',
       ]
 
@@ -39,8 +37,6 @@ services:
     command:
       [
         'node',
-        '--es-module-specifier-resolution=node',
         '--enable-source-maps',
-        '--no-warnings',
         './packages/api/dist/index.js',
       ]

@@ -5,7 +5,6 @@ docker compose \
   -f docker-compose.ama.yml \
   -f docker-compose.automoderator.yml \
   -f docker-compose.modmail.yml \
-  -f docker-compose.roles.yml \
   -f docker-compose.shared.yml \
   -f docker-compose.social.yml \
   -f docker-compose.website.yml \

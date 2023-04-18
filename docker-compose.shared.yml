@@ -67,6 +67,22 @@ services:
       interval: 10s
       timeout: 5s
 
+  parseable:
+    image: parseable/parseable:v0.4.0-debug
+    restart: unless-stopped
+    expose:
+      - '8000'
+    environment:
+      P_FS_DIR: '/parseable/data'
+      P_STAGING_DIR: '/parseable/staging'
+      P_USERNAME: 'admin'
+    env_file:
+      - ./.env.parseable
+    volumes:
+      - parseable-data:/parseable/data
+      - parseable-staging:/parseable/staging
+    command: ['parseable', 'local-store']
+
   ghost:
     image: ghost:4-alpine
     restart: unless-stopped
@@ -88,3 +104,7 @@ volumes:
     name: 'chatsift-redis-data'
   ghost-data:
     name: 'chatsift-ghost-data'
+  parseable-data:
+    name: 'chatsift-parseable-data'
+  parseable-staging:
+    name: 'chatsift-parseable-staging'
