@@ -99,10 +99,11 @@ services:
 
   watchtower:
     image: containrrr/watchtower
+    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     command: [
-      '--interval 120',
+      '--interval', '120',
       '--cleanup',
       '--include-restarting',
       '--include-stopped',
