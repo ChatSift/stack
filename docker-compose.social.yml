@@ -18,6 +18,10 @@ services:
         'node',
         '--enable-source-maps',
         './packages/bot/dist/index.js',
+        '|&',
+        'node',
+        '--enable-source-maps',
+        './node_modules/.bin/chatsift-logs'
       ]
 
   social-api:
