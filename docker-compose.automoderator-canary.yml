@@ -35,5 +35,7 @@ services:
     image: chatsift/automoderator:v3
     env_file:
       - ./.env.automoderator-canary
+    environment:
+      TASK_RUNNER_ID: '1'
     restart: unless-stopped
     command: ['node', '--enable-source-maps', 'services/task-runner/dist/index.js']
