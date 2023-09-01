@@ -8,28 +8,28 @@ services:
     restart: unless-stopped
     expose:
       - 8000
-    command: 'sh -c "yarn prisma migrate deploy && node --enable-source-maps ./packages/discord-proxy/dist/index.js"'
+    command: 'sh -c "yarn prisma migrate deploy && node --enable-source-maps ./services/discord-proxy/dist/index.js"'
 
   automoderator-canary-gateway:
     image: chatsift/automoderator:v3
     env_file:
       - ./.env.automoderator-canary
     restart: unless-stopped
-    command: 'sh -c "yarn prisma migrate deploy && node --enable-source-maps ./packages/gateway/dist/index.js"'
+    command: 'sh -c "yarn prisma migrate deploy && node --enable-source-maps ./services/gateway/dist/index.js"'
 
   automoderator-canary-interactions:
     image: chatsift/automoderator:v3
     env_file:
       - ./.env.automoderator-canary
     restart: unless-stopped
-    command: 'sh -c "yarn prisma migrate deploy && node --enable-source-maps ./packages/interactions/dist/index.js"'
+    command: 'sh -c "yarn prisma migrate deploy && node --enable-source-maps ./services/interactions/dist/index.js"'
 
   automoderator-canary-logging:
     image: chatsift/automoderator:v3
     env_file:
       - ./.env.automoderator-canary
     restart: unless-stopped
-    command: 'sh -c "yarn prisma migrate deploy && node --enable-source-maps ./packages/logging/dist/index.js"'
+    command: 'sh -c "yarn prisma migrate deploy && node --enable-source-maps ./services/logging/dist/index.js"'
 
   automoderator-canary-task-runner:
     image: chatsift/automoderator:v3
@@ -38,4 +38,4 @@ services:
     environment:
       TASK_RUNNER_ID: '1'
     restart: unless-stopped
-    command: 'sh -c "yarn prisma migrate deploy && node --enable-source-maps ./packages/task-runner/dist/index.js"'
+    command: 'sh -c "yarn prisma migrate deploy && node --enable-source-maps ./services/task-runner/dist/index.js"'
