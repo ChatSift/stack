@@ -80,7 +80,3 @@ services:
     volumes:
       - ./logs/automoderator:/usr/service/logs
     command: ['node', '--enable-source-maps', 'services/scheduler/dist/index.js']
-
-volumes:
-  redis-data:
-    name: 'automoderator-v2-redis-data'

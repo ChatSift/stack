@@ -107,7 +107,11 @@ services:
       '--cleanup',
       '--include-restarting',
       '--include-stopped',
-      'chatsift-social-bot-1', 'chatsift-social-api-1'
+      'chatsift-social-bot-1', 'chatsift-social-api-1',
+
+      'chatsift-automoderator-canary-discord-proxy', 'chatsift-automoderator-canary-gateway',
+      'chatsift-automoderator-canary-interactions', 'chatsift-automoderator-canary-logging',
+      'chatsift-automoderator-canary-task-runner'
     ]
 
 volumes:
