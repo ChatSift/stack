@@ -109,9 +109,9 @@ services:
       '--include-stopped',
       'chatsift-social-bot-1', 'chatsift-social-api-1',
 
-      'chatsift-automoderator-canary-discord-proxy', 'chatsift-automoderator-canary-gateway',
-      'chatsift-automoderator-canary-interactions', 'chatsift-automoderator-canary-logging',
-      'chatsift-automoderator-canary-task-runner'
+      'chatsift-automoderator-canary-discord-proxy-1', 'chatsift-automoderator-canary-gateway-1',
+      'chatsift-automoderator-canary-interactions-1', 'chatsift-automoderator-canary-logging-1',
+      'chatsift-automoderator-canary-task-runner-1'
     ]
 
 volumes:
