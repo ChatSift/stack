@@ -68,14 +68,13 @@ services:
       timeout: 5s
 
   parseable:
-    image: parseable/parseable:v0.4.0-debug
+    image: parseable/parseable:v1.1.0
     restart: unless-stopped
     expose:
       - '8000'
     environment:
       P_FS_DIR: '/parseable/data'
       P_STAGING_DIR: '/parseable/staging'
-      P_USERNAME: 'admin'
     env_file:
       - ./.env.parseable
     volumes:
@@ -96,23 +95,6 @@ services:
       mail__options__service: 'Mailgun'
     volumes:
       - ghost-data:/var/lib/ghost/content
-
-  watchtower:
-    image: containrrr/watchtower
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: [
-      '--interval', '120',
-      '--cleanup',
-      '--include-restarting',
-      '--include-stopped',
-      'chatsift-social-bot-1', 'chatsift-social-api-1',
-
-      'chatsift-automoderator-canary-discord-proxy-1', 'chatsift-automoderator-canary-gateway-1',
-      'chatsift-automoderator-canary-interactions-1', 'chatsift-automoderator-canary-logging-1',
-      'chatsift-automoderator-canary-task-runner-1'
-    ]
 
 volumes:
   postgres-data:
