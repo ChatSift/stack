@@ -107,3 +107,9 @@ volumes:
     name: 'chatsift-parseable-data'
   parseable-staging:
     name: 'chatsift-parseable-staging'
+
+# Also to hack in chatsift/chatsift
+networks:
+  default:
+    name: chatsift
+    external: true
