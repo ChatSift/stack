@@ -6,7 +6,7 @@ services:
     env_file:
       - ./.env.automoderator
     environment:
-      DB_URL: 'postgresql://user:admin@postgres:5432/automoderator'
+      DB_URL: 'postgresql://user:admin@postgres-old:5432/automoderator'
     restart: unless-stopped
     volumes:
       - ./logs/automoderator:/usr/service/logs
@@ -40,7 +40,7 @@ services:
     env_file:
       - ./.env.automoderator
     environment:
-      DB_URL: 'postgresql://user:admin@postgres:5432/automoderator'
+      DB_URL: 'postgresql://user:admin@postgres-old:5432/automoderator'
     restart: unless-stopped
     expose:
       - 3002
@@ -53,7 +53,7 @@ services:
     env_file:
       - ./.env.automoderator
     environment:
-      DB_URL: 'postgresql://user:admin@postgres:5432/automoderator'
+      DB_URL: 'postgresql://user:admin@postgres-old:5432/automoderator'
     restart: unless-stopped
     volumes:
       - ./logs/automoderator:/usr/service/logs
@@ -64,7 +64,7 @@ services:
     env_file:
       - ./.env.automoderator
     environment:
-      DB_URL: 'postgresql://user:admin@postgres:5432/automoderator'
+      DB_URL: 'postgresql://user:admin@postgres-old:5432/automoderator'
     restart: unless-stopped
     volumes:
       - ./logs/automoderator:/usr/service/logs
@@ -75,7 +75,7 @@ services:
     env_file:
       - ./.env.automoderator
     environment:
-      DB_URL: 'postgresql://user:admin@postgres:5432/automoderator'
+      DB_URL: 'postgresql://user:admin@postgres-old:5432/automoderator'
     restart: unless-stopped
     volumes:
       - ./logs/automoderator:/usr/service/logs

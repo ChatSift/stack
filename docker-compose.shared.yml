@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  postgres:
+  postgres-old:
     build:
       context: ./build/postgresql
       dockerfile: ./Dockerfile
@@ -35,7 +35,7 @@ services:
       - .env.pg_backup
     restart: on-failure
     depends_on:
-      - postgres
+      - postgres-old
 
   caddy:
     build:

@@ -6,12 +6,12 @@ services:
     env_file:
       - ./.env.ama
     environment:
-      DATABASE_URL: 'postgresql://user:admin@postgres:5432/ama'
+      DATABASE_URL: 'postgresql://user:admin@postgres-old:5432/ama'
     restart: unless-stopped
     volumes:
       - ./logs/ama:/usr/ama/logs
     depends_on:
-      - postgres
+      - postgres-old
     command:
       [
         'node',
