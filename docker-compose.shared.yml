@@ -43,6 +43,9 @@ services:
       dockerfile: ./Dockerfile
     env_file:
       - ./.env.root
+    volumes:
+      - caddy-data:/data
+      - caddy-config:/config
     ports:
       - '80:80'
       - '443:443'
@@ -107,6 +110,10 @@ volumes:
     name: 'chatsift-parseable-data'
   parseable-staging:
     name: 'chatsift-parseable-staging'
+  caddy-data:
+    name: 'chatsift-caddy-data'
+  caddy-config:
+    name: 'chatsift-caddy-config'
 
 # Also to hack in chatsift/chatsift
 networks:
