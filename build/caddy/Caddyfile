@@ -6,6 +6,11 @@ api.automoderator.app {
   reverse_proxy * http://website-backend:8080
 }
 
+# Hack for https://github.com/chatsift/chatsift while it's in-dev
+api-canary.automoderator.app {
+  reverse_proxy * http://localhost:9876
+}
+
 interactions.automoderator.app {
   reverse_proxy * http://automoderator-interactions:3002
 }
