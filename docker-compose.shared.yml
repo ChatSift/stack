@@ -25,7 +25,7 @@ services:
       POSTGRES_USER: 'user'
       POSTGRES_PASS: 'admin'
       POSTGRES_PORT: '5432'
-      POSTGRES_HOST: 'postgres'
+      POSTGRES_HOST: 'postgres-old'
       REMOVE_BEFORE: '30'
       STORAGE_BACKEND: 'S3'
       HOST_BASE: 's3.amazonaws.com'
