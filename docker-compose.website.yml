@@ -8,8 +8,8 @@ services:
     environment:
       DATABASE_URL: 'postgresql://user:admin@postgres-old:5432/website'
       PORT: '8080'
-    expose:
-      - 8080
+    ports:
+      - 127.0.0.1:7001:8080
     restart: unless-stopped
     volumes:
       - ./logs/website:/usr/website/logs

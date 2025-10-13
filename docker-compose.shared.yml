@@ -37,19 +37,6 @@ services:
     depends_on:
       - postgres-old
 
-  caddy:
-    build:
-      context: ./build/caddy
-      dockerfile: ./Dockerfile
-    env_file:
-      - ./.env.root
-    volumes:
-      - caddy-data:/data
-      - caddy-config:/config
-    ports:
-      - '80:80'
-      - '443:443'
-
   rabbitmq:
     image: rabbitmq:3-management-alpine
     restart: unless-stopped
@@ -73,8 +60,8 @@ services:
   parseable:
     image: parseable/parseable:v1.1.0
     restart: unless-stopped
-    expose:
-      - '8000'
+    ports:
+      - 127.0.0.1:7003:8000
     environment:
       P_FS_DIR: '/parseable/data'
       P_STAGING_DIR: '/parseable/staging'
@@ -85,35 +72,15 @@ services:
       - parseable-staging:/parseable/staging
     command: ['parseable', 'local-store']
 
-  ghost:
-    image: ghost:4-alpine
-    restart: unless-stopped
-    expose:
-      - 2368
-    environment:
-      NODE_ENV: 'production'
-      url: 'https://blog.automoderator.app'
-      database__client: 'sqlite3'
-      mail__transport: 'SMTP'
-      mail__options__service: 'Mailgun'
-    volumes:
-      - ghost-data:/var/lib/ghost/content
-
 volumes:
   postgres-data:
     name: chatsift-postgres-data
   redis-data:
     name: 'chatsift-redis-data'
-  ghost-data:
-    name: 'chatsift-ghost-data'
   parseable-data:
     name: 'chatsift-parseable-data'
   parseable-staging:
     name: 'chatsift-parseable-staging'
-  caddy-data:
-    name: 'chatsift-caddy-data'
-  caddy-config:
-    name: 'chatsift-caddy-config'
 
 # Also to hack in chatsift/chatsift
 networks:

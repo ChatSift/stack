@@ -42,8 +42,8 @@ services:
     environment:
       DB_URL: 'postgresql://user:admin@postgres-old:5432/automoderator'
     restart: unless-stopped
-    expose:
-      - 3002
+    ports:
+      - 127.0.0.1:7002:3002
     volumes:
       - ./logs/automoderator:/usr/service/logs
     command: ['node', '--enable-source-maps', 'services/interactions/dist/index.js']
