@@ -20,26 +20,3 @@ services:
         '--no-warnings',
         './packages/bot/dist/index.js',
       ]
-
-  modmail-api:
-    image: chatsift/modmail:latest
-    env_file:
-      - ./.env.modmail
-    environment:
-      DATABASE_URL: 'postgresql://user:admin@postgres-old:5432/modmail'
-      PORT: '8080'
-    expose:
-      - 8080
-    restart: unless-stopped
-    volumes:
-      - ./logs/modmail:/usr/modmail/logs
-    depends_on:
-      - postgres-old
-    command:
-      [
-        'node',
-        '--es-module-specifier-resolution=node',
-        '--enable-source-maps',
-        '--no-warnings',
-        './packages/api/dist/index.js',
-      ]

@@ -14,19 +14,3 @@ services:
     volumes:
       - ./logs/social:/usr/social/logs
     command: 'sh -c "yarn prisma migrate deploy && (node --enable-source-maps ./packages/bot/dist/index.js 2>&1 | node --enable-source-maps ./node_modules/.bin/chatsift-logs)"'
-
-  social-api:
-    image: chatsift/social:latest
-    env_file:
-      - ./.env.social
-      - ./.env.parseable
-    environment:
-      DATABASE_URL: 'postgresql://user:admin@postgres-old:5432/social'
-      PORT: '8080'
-      SERVICE_NAME: 'socialapi'
-    expose:
-      - 8080
-    restart: unless-stopped
-    volumes:
-      - ./logs/social:/usr/social/logs
-    command: 'sh -c "yarn prisma migrate deploy && (node --enable-source-maps ./packages/api/dist/index.js 2>&1 | node --enable-source-maps ./node_modules/.bin/chatsift-logs)"'
