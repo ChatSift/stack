@@ -37,41 +37,6 @@ services:
     depends_on:
       - postgres-old
 
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
-    restart: unless-stopped
-    expose:
-      - '5672'
-    healthcheck:
-      test: ['CMD', 'rabbitmq-diagnostics', '-q', 'ping']
-      interval: 60s
-      timeout: 5s
-
-  redis:
-    image: redis:6-alpine
-    volumes:
-      - redis-data:/data
-    restart: unless-stopped
-    healthcheck:
-      test: ['CMD-SHELL', 'redis-cli ping']
-      interval: 10s
-      timeout: 5s
-
-  parseable:
-    image: parseable/parseable:v1.1.0
-    restart: unless-stopped
-    ports:
-      - 127.0.0.1:7003:8000
-    environment:
-      P_FS_DIR: '/parseable/data'
-      P_STAGING_DIR: '/parseable/staging'
-    env_file:
-      - ./.env.parseable
-    volumes:
-      - parseable-data:/parseable/data
-      - parseable-staging:/parseable/staging
-    command: ['parseable', 'local-store']
-
 volumes:
   postgres-data:
     name: chatsift-postgres-data
